@@ -8,7 +8,6 @@ Thailand's premier hotel group manages 120 properties hosting 180,000 guests ann
 
 ```mermaid
 flowchart LR
-    SP --> RAW[RAW Tables]
     RAW --> DT[Dynamic Tables]
     DT --> ML[ML Functions]
     DT --> SEARCH[Cortex Search]
