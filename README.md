@@ -119,7 +119,7 @@ Industry research and Snowflake customer outcomes:
 - **Thailand's hotel industry generated ฿680B in revenue in 2023 from 28M international arrivals** — [TAT Thailand](https://www.tat.or.th/en)
 - **Personalized guest experiences increase repeat booking rates by 20-40%** — [McKinsey Hospitality](https://www.mckinsey.com/industries/travel-logistics-and-infrastructure/our-insights)
 - **Service recovery within 24 hours retains 70% of dissatisfied guests vs 30% without** — [Harvard Business Review](https://hbr.org/topic/customer-service)
-- **AI-driven sentiment analysis improves guest satisfaction scores by 8-12 NPS points** — [Deloitte Hospitality](https://www.deloitte.com/us/en/Industries/consumer/topics/hospitality.html)
+- **AI-driven sentiment analysis improves guest satisfaction scores by 8-12 NPS points** — [Deloitte Hospitality](https://www.deloitte.com/us/en/Industries/consumer.html)
 - **Wyndham Hotels** (Snowflake customer): unified 30+ brands on a single data platform, enabling real-time revenue optimization across 9,000+ properties -- [snowflake.com/customers/accor](https://www.snowflake.com/en/customers/all-customers/case-study/accor/)
 
 ## Key Demo Numbers
