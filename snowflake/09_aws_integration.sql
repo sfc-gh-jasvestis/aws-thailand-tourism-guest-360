@@ -1,6 +1,6 @@
 -- ============================================================================
 -- 09_AWS_INTEGRATION.SQL — AWS services for Guest Experience 360
--- Account: 018437500440 | Region: ap-southeast-1
+-- Account: <YOUR_AWS_ACCOUNT_ID> | Region: ap-southeast-1
 -- Skip this script for Snowflake-only build
 -- ============================================================================
 USE DATABASE GUEST_EXPERIENCE;
@@ -72,5 +72,5 @@ CREATE OR REPLACE EXTERNAL ACCESS INTEGRATION aws_thailand_tourism_guest_360_SNS
   ENABLED = TRUE
   COMMENT = 'SNS access for Guest Experience 360 alerts';
 
--- SNS Topic ARN: arn:aws:sns:ap-southeast-1:018437500440:sea-demos-aws-thailand-tourism-guest-360
+-- SNS Topic ARN: arn:aws:sns:ap-southeast-1:<YOUR_AWS_ACCOUNT_ID>:sea-demos-aws-thailand-tourism-guest-360
 
