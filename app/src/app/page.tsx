@@ -32,15 +32,22 @@ export default function HomePage() {
       .catch(() => {});
   }, []);
 
+
+  // KPI values come from /api/data, which reads CURATED.KPI_SUMMARY. The literal
+  // stays as a fallback so the card still renders if the API is unavailable.
+  const kpiVal = (title: string, fallback: string): string =>
+    (data?.kpiCards as { title: string; value: string }[] | undefined)
+      ?.find((k) => k.title === title)?.value ?? fallback;
+
   const title = narrative?.title || 'SEA AWS Demo';
 
   const executiveCockpit = (
     <div className="space-y-6">
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <KPICard title="Guest Profiles" value="4.2M" status="neutral" />
-        <KPICard title="Repeat Rate" value="34%" status="neutral" />
-        <KPICard title="NPS Score" value="72" status="neutral" />
-        <KPICard title="Active Campaigns" value="18" status="neutral" />
+        <KPICard title="Guest Profiles" value={kpiVal('Guest Profiles', '4.2M')} status="neutral" />
+        <KPICard title="Repeat Rate" value={kpiVal('Repeat Rate', '34%')} status="neutral" />
+        <KPICard title="NPS Score" value={kpiVal('NPS Score', '72')} status="neutral" />
+        <KPICard title="Active Campaigns" value={kpiVal('Active Campaigns', '18')} status="neutral" />
       </div>
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         <div className="lg:col-span-1">
@@ -87,9 +94,9 @@ export default function HomePage() {
   const domainTab1 = (
     <div className="space-y-6">
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-        <KPICard title="Offer Conversion" value="12.4%" />
-        <KPICard title="Upsell Revenue" value="฿84M" />
-        <KPICard title="App Engagement" value="67%" />
+        <KPICard title="Offer Conversion" value={kpiVal('Offer Conversion', '12.4%')} />
+        <KPICard title="Upsell Revenue" value={kpiVal('Upsell Revenue', '฿84M')} />
+        <KPICard title="App Engagement" value={kpiVal('App Engagement', '67%')} />
       </div>
       <Chart
         data={data?.detail || [{ x: 'Mon', y: 24 }, { x: 'Tue', y: 28 }, { x: 'Wed', y: 22 }, { x: 'Thu', y: 31 }, { x: 'Fri', y: 26 }, { x: 'Sat', y: 19 }, { x: 'Sun', y: 23 }]}
