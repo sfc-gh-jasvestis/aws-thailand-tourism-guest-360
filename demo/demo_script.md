@@ -1,109 +1,82 @@
-# Demo Script: Guest Experience 360
-## ~4-Minute Recorded Walkthrough
-**Format**: Screen recording with voiceover
-**Target**: Customer meeting / booth loop / social share
-**Narrative**: "Snowflake unifies guest data across 120 properties, analyzes sentiment from 200K reviews, generates personalized recommendations, and delivers targeted communications — all native SQL, replacing fragmented guest CRM"
-**Demo Mode**: Open app with `?demo=true` for presenter notes
+# Guest Experience 360
 
----
+**Thailand - Tourism & Hospitality**
+Use case: Guest Experience & Personalization
 
-## Two Personas
+> Unified guest profiles across 120 properties — Comprehend analyzes sentiment from reviews, Personalize drives recommendations via Cortex Complete, and SES delivers personalized communications through Notification Integration.
 
-| Persona | Role | Tool | What they care about |
-|---|---|---|---|
-| **Natthawut Thongprasert** | VP Guest Experience | React App (SPCS) | Guest satisfaction scores, loyalty metrics, lifetime value, service recovery |
-| **Ploy Suwannapha** | Guest Relations Manager | Amazon QuickSight | Individual guest preferences, service recovery alerts, upsell opportunities, loyalty tier management |
+## Why Snowflake
 
----
+Snowflake unifies guest data across 120 properties, analyzes sentiment from 200K reviews, generates personalized recommendations, and delivers targeted communications — all native SQL, replacing fragmented guest CRM
 
-## What's Built
+- **AI_SENTIMENT on multilingual reviews** - Only demo analyzing guest sentiment in Thai, English, Chinese, and Korean simultaneously
+- **Cortex Complete for personalized guest offers** - AI-generated personalized recommendations based on full stay history and preferences
+- **Service recovery automation** - End-to-end: negative review → AI drafts apology → sends via Notification Integration
+- **Thai hospitality context** - 120 properties across 4 Thai destinations with realistic multi-source-market guest data
+- **Guest lifetime value via Dynamic Tables** - Real-time CLV calculation driving personalization investment decisions
+- **Competitive sentiment benchmarking** - 50K competitor reviews analyzed for relative positioning
 
-| Layer | Component | Detail |
+## What is deployed
+
+| | |
+|---|---|
+| Database | `THAILAND_TOURISM_GUEST_360` |
+| Service | `THAILAND_TOURISM_GUEST_360_APP` |
+| Compute pool | `SEA_DEMOS_THAILAND_POOL` |
+| Dimension table | `RAW.THAI_TOURISM_TRENDS` (20 rows) |
+| Fact table | `RAW.STAY_HISTORY` (250,000 rows, 90 days) |
+| Curated layer | `CURATED.PERFORMANCE_SUMMARY`, `CURATED.TREND_ANALYSIS`, `CURATED.KPI_SUMMARY` |
+| Currency | THB (฿) |
+
+Regions in play: Bangkok, Chonburi, Rayong, Chiang Mai, Songkhla
+Segments: Luxury Resort, Boutique, City Business, Serviced Apartment
+
+Dynamic tables are created suspended and refreshed on demand:
+
+```bash
+./refresh_demo_data.sh THAILAND_TOURISM_GUEST_360
+```
+
+## KPI cards
+
+Every card below is served live from `CURATED.KPI_SUMMARY`. The app keeps the
+original literal as a fallback, so it still renders if Snowflake is unreachable.
+
+| Card | Value | Backed by |
 |---|---|---|
-| **RAW** | 8 tables | GUEST_PROFILES (180000), STAY_HISTORY (450000), GUEST_REVIEWS (200000), SERVICE_INTERACTIONS (350000), LOYALTY_PROGRAM (85000), PERSONALIZATION_ACTIONS (25000), COMPETITOR_REVIEWS (50000), THAI_TOURISM_TRENDS (12) |
-| **CURATED** | 4 Dynamic Tables | GUEST_SENTIMENT_SCORES, GUEST_LIFETIME_VALUE, SERVICE_RECOVERY_QUEUE, PROPERTY_NPS_TRENDS |
-| **ML** | ML.FORECAST + ML.ANOMALY_DETECTION | Forecasting + anomaly detection |
-| **AI** | AI_SENTIMENT, COMPLETE, AI_EXTRACT | Classification + extraction |
-| **Search** | Cortex Search | 200000 documents indexed |
-| **Agent** | GUEST_EXPERIENCE_AGENT | Semantic View + Search tools |
+| Guest Profiles | `4.2M` | total across Thai Tourism Trends |
+| Repeat Rate | `34%` | average per event |
+| NPS Score | `72` | average per event |
+| Active Campaigns | `18` | total across Thai Tourism Trends |
+| Offer Conversion | `12.4%` | average per event |
+| Upsell Revenue | `฿84M` | total across Thai Tourism Trends |
+| App Engagement | `67%` | average per event |
 
 
----
+## Demo flow
 
-## The Story
+1. Executive Cockpit
+2. Sentiment Intelligence
+3. Guest Personalization
+4. Ask AI
+5. Architecture & Data
 
-Thailand's premier hotel group manages 120 properties hosting 180,000 guests annually. Guest reviews across 4 languages reveal declining satisfaction — but fragmented data across OTA platforms means 342 unhappy guests are waiting for recovery while personalization opportunities worth ฿95M go untapped.
+## Talking points
 
----
+- **0.72 sentiment** - portfolio average (down from 0.78 — declining trend)
+- **342 guests** - in service recovery queue awaiting follow-up
+- **200K reviews** - analyzed by AI_SENTIMENT across 4 languages
+- **25,000 offers** - personalized recommendations generated for upcoming stays
+- **7 properties** - showing declining NPS trends
+- **฿95M** - personalization revenue opportunity (US$2.7M)
 
-## Script
+## Business impact
 
-### [0:00–0:45] EXECUTIVE COCKPIT
-
-**Show**: Executive Cockpit tab
-
-> "Portfolio guest sentiment at 0.72 — down from 0.78 last quarter."
-
-**Action**: Point at sentiment trend chart
-
-### [0:45–1:30] SENTIMENT INTELLIGENCE
-
-**Show**: Sentiment Intelligence tab
-
-> "AI_SENTIMENT analyzes 200K reviews in Thai, English, Chinese, and Korean."
-
-**Action**: Show sentiment heatmap by property and topic
-
-### [1:30–2:15] GUEST PERSONALIZATION
-
-**Show**: Guest Personalization tab
-
-> "Cortex Complete generates personalized recommendations for 25,000 upcoming stays."
-
-**Action**: Show personalization recommendation cards
-
-### [2:15–3:00] ASK AI
-
-**Show**: Ask AI tab
-
-> "Natthawut asks: 'Which properties have the most negative Chinese guest reviews?'"
-
-**Action**: Type: 'Properties with most negative Chinese reviews'
-
-### [3:00–3:45] ARCHITECTURE & DATA
-
-**Show**: Architecture & Data tab
-
-> "Seven Snowflake capabilities, six AWS services."
-
-**Action**: Walk through architecture diagram
-
+- Thailand's hotel industry generated ฿680B in revenue in 2023 from 28M international arrivals (TAT Thailand)
+- Personalized guest experiences increase repeat booking rates by 20-40% (McKinsey Hospitality)
+- Service recovery within 24 hours retains 70% of dissatisfied guests vs 30% without (Harvard Business Review)
+- AI-driven sentiment analysis improves guest satisfaction scores by 8-12 NPS points (Deloitte Hospitality)
 
 ---
-
-## Key Demo Differentiators
-
-1. **AI_SENTIMENT on multilingual reviews** — Only demo analyzing guest sentiment in Thai, English, Chinese, and Korean simultaneously
-2. **Cortex Complete for personalized guest offers** — AI-generated personalized recommendations based on full stay history and preferences
-3. **Service recovery automation** — End-to-end: negative review → AI drafts apology → sends via Notification Integration
-4. **Thai hospitality context** — 120 properties across 4 Thai destinations with realistic multi-source-market guest data
-5. **Guest lifetime value via Dynamic Tables** — Real-time CLV calculation driving personalization investment decisions
-6. **Competitive sentiment benchmarking** — 50K competitor reviews analyzed for relative positioning
-
-
----
-
-## Demo Prep Checklist
-
-### Data Verification
-- [ ] `SELECT COUNT(*) FROM GUEST_EXPERIENCE.RAW.GUEST_REVIEWS` → 200000
-- [ ] `SELECT COUNT(*) FROM GUEST_EXPERIENCE.RAW.GUEST_PROFILES` → 180000
-- [ ] `SELECT COUNT(*) FROM GUEST_EXPERIENCE.CURATED.SERVICE_RECOVERY_QUEUE` → ~342
-
-### ML Model Verification
-- [ ] `SELECT COUNT(*) FROM GUEST_EXPERIENCE.ML.SATISFACTION_FORECAST_RESULTS` → >0
-- [ ] `SELECT SUM(CASE WHEN IS_ANOMALY THEN 1 ELSE 0 END) FROM GUEST_EXPERIENCE.ML.SENTIMENT_ANOMALY_RESULTS` → >=5
-
-### AI/Agent Verification
-- [ ] `SELECT COUNT(*) FROM GUEST_EXPERIENCE.AI.SENTIMENT_SCORES WHERE SENTIMENT < 0.3` → >5000
-
+Generated from `generator/demo_specs/aws-thailand-tourism-guest-360.json`. Do not hand-edit: run
+`python3 generator/gen_repo_docs.py aws-thailand-tourism-guest-360` instead.
