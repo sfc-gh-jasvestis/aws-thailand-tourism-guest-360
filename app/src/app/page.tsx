@@ -53,6 +53,7 @@ export default function HomePage() {
         <div className="lg:col-span-1">
           <GeoMap
             country="thailand"
+            labels={{ entity: 'Segments', event: 'Guest Stays', alert: 'Service Issues' }}
             regions={data?.regions}
             markers={[{"label": "Bangkok", "value": "1.2M arrivals/mo", "color": "blue", "size": "lg"}, {"label": "Phuket", "value": "840K arrivals", "color": "blue", "size": "lg"}, {"label": "Chiang Mai", "value": "420K arrivals", "color": "green", "size": "md"}, {"label": "Samui", "value": "Occ: 84%", "color": "green", "size": "md"}, {"label": "Pattaya", "value": "Occ: 72%", "color": "amber", "size": "sm"}]}
             routes={[]}
@@ -83,8 +84,13 @@ export default function HomePage() {
         columns={[
           { key: 'id', header: '#' },
           { key: 'name', header: 'Segment' },
+          { key: 'region', header: 'Region' },
           { key: 'status', header: 'Growth' },
-          { key: 'value', header: 'Rev/Guest ฿K' },
+          { key: 'm1', header: 'Rev/Guest ฿K' },
+          { key: 'm2', header: 'Nps Score' },
+          { key: 'm3', header: 'Offer Conversion' },
+          { key: 'events', header: 'Guest Stays' },
+          { key: 'alerts', header: 'Service Issues' },
         ]}
         data={data?.entities || []}
         title="Guest Segments"
